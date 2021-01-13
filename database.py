@@ -8,7 +8,7 @@ root.title('Database management')
 
 # Create Database or connect to one
 conn = fdb.connect(
-    host="localhost", database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+    host="localhost", database='database.fdb', user='user', password='password')
 
 #  Create cursor
 cur = conn.cursor()
@@ -26,7 +26,7 @@ cur = conn.cursor()
 def submit():
     #  Database connection in the function
     conn = fdb.connect(
-        host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+        host='localhost', database='database.fdb', user='user', password='password')
     # Cursor
     cur = conn.cursor()
 
@@ -64,7 +64,7 @@ def submit():
 def select():
     #  Database connection in the function
     conn = fdb.connect(
-        host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+        host='localhost', database='databse.fdb', user='user', password='password')
     # Cursor
     cur = conn.cursor()
 
