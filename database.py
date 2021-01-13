@@ -8,7 +8,7 @@ root.title('Database management')
 
 # Create Database or connect to one
 conn = fdb.connect(
-    host="localhost", database='database.fdb', user='user', password='password')
+    host="localhost", database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
 
 #  Create cursor
 cur = conn.cursor()
@@ -22,34 +22,35 @@ cur = conn.cursor()
 #  )""")
 
 #  Create Submit Function
+#  simnumbber = "SIM NUMBER"
+
 
 def submit():
     #  Database connection in the function
     conn = fdb.connect(
-        host='localhost', database='database.fdb', user='user', password='password')
+        host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
     # Cursor
     cur = conn.cursor()
 
     # Insert Into table
-    cur.execute("""INSERT INTO cards (number, SIM NUMBER, operator, type, tariff, data, status) 
-                    VALUES(:simnumber, :cardnumber, :operator, :type, :tariff, :data, :status);""",
-                {
-                    'simnumber': simnumber.get(),
-                    'cardnumber': cardnumber.get(),
-                    'operator': operator.get(),
-                    'type': type.get(),
-                    'tariff': tariff.get(),
-                    'data': data.get(),
-                    'status': status.get()
+    cur.execute("""INSERT INTO cards (number,"SIM NUMBER",OPERATOR,TYPE,TARIFF,DATA,STATUS) VALUES (?,?,?,?,?,?,?);""",
+                (simnumber.get(), cardnumber.get(), operator.get(), type.get(), tariff.get(), data.get(), status.get()))
+    ''' '#  {
+#	'number':simnumber.get(),
+#	'simnumber': cardnumber.get(),
+#	'operator': operator.get(),
+#	'type': type.get(),
+#	'tariff': tariff.get(),
+#	'data': data.get(),
+#	'status': status.get() 
+#  }) '''
 
-                })
-
-    # Commit Changes
+    # Commit Cahanges
     conn.commit()
     # Close connection
     conn.close()
 
-    # Clear Text boxes
+    # Clear Textboxes
     simnumber.delete(0, END)
     cardnumber.delete(0, END)
     operator.delete(0, END)
@@ -64,25 +65,25 @@ def submit():
 def select():
     #  Database connection in the function
     conn = fdb.connect(
-        host='localhost', database='databse.fdb', user='user', password='password')
+        host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
     # Cursor
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM cards;")
+    cur.execute("""SELECT number, "SIM NUMBER", operator FROM cards;""")
     #  cur.fetchall -- показва всички
     #  cur.fetchone -- показва един запис
     #  cur.fetchmany() -- показва записи на брой в скобите
-    records = cur.fetchmany(50)
+    records = cur.fetchmany(10)
 
     # Loop through results
     print_records = ''
-    for record in records[0]:
+    for record in records:
         print_records += str(record) + "\n"
 
     select_label = Label(root, text=print_records)
     select_label.grid(row=9, column=0, columnspan=2)
 
-    # Commit Changes
+    # Commit Cahanges
     conn.commit()
     # Close connection
     conn.close()
