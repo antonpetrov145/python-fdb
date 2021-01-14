@@ -85,7 +85,7 @@ class Database:
     def submit(self):
         #  Database connection in the function
         conn = fdb.connect(
-            host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+            host='localhost', database='database.fdb', user='user', password='password')
         # Cursor
         cur = conn.cursor()
 
@@ -114,7 +114,7 @@ class Database:
     def select(self):
         #  Database connection in the function
         conn = fdb.connect(
-            host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+            host='localhost', database='database.fdb', user='user', password='password')
         # Cursor
         cur = conn.cursor()
 
@@ -140,7 +140,7 @@ class Database:
 
     def search(self):
         conn = fdb.connect(
-            host='localhost', database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+            host='localhost', database='database.fdb', user='user', password='password')
         # Cursor
         cur = conn.cursor()
         cur.execute("""SELECT number, "SIM NUMBER", operator 
@@ -160,7 +160,7 @@ root = Tk()
 root.title('Database Management')
 #  Connect to Database
 conn = fdb.connect(
-    host="localhost", database='C:/SIMCARDS.fdb', user='sysdba', password='masterkey')
+    host="localhost", database='database.fdb', user='user', password='password')
 #  Create cursor
 cur = conn.cursor()
 
